@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>爬虫 on 味次酱博客</title>
+    <link>http://localhost:1313/tags/%E7%88%AC%E8%99%AB/</link>
+    <description>Recent content in 爬虫 on 味次酱博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 30 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E7%88%AC%E8%99%AB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>破解SSL-PINING</title>
+      <link>http://localhost:1313/post/break-ssl-pining/</link>
+      <pubDate>Tue, 30 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/break-ssl-pining/</guid>
+      <description>如何抓包 SSL-PINING 1. 准备工作 1.1 模拟器或手机 推荐使用模拟器 模拟器 Root 很方便，避免 Root 失败的风险. 安装谷歌全家桶 装插件失败后，无风险。 测试了很多安卓拟器，打</description>
+    </item>
+    
+  </channel>
+</rss>

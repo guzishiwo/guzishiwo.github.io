@@ -17,6 +17,20 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/post/break-ssl-pining/</loc>
+    <lastmod>2018-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/app%E6%8A%93%E5%8C%85/</loc>
+    <lastmod>2018-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/categories/</loc>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -31,6 +45,7 @@
   
   <url>
     <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2018-10-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -45,6 +60,13 @@
   <url>
     <loc>http://localhost:1313/tags/%E6%97%A5%E8%AE%B0/</loc>
     <lastmod>2018-12-20T15:48:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/%E7%88%AC%E8%99%AB/</loc>
+    <lastmod>2018-10-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

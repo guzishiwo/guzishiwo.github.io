@@ -6,9 +6,19 @@
     <description>Recent content in Tags on 味次酱博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <lastBuildDate>Tue, 30 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>APP抓包</title>
+      <link>http://localhost:1313/tags/app%E6%8A%93%E5%8C%85/</link>
+      <pubDate>Tue, 30 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/app%E6%8A%93%E5%8C%85/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>日记</title>
@@ -16,6 +26,15 @@
       <pubDate>Thu, 20 Dec 2018 15:48:17 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/%E6%97%A5%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>爬虫</title>
+      <link>http://localhost:1313/tags/%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Tue, 30 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E7%88%AC%E8%99%AB/</guid>
       <description></description>
     </item>
     
