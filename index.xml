@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>味次酱博客</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on 味次酱博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 20 Aug 2017 21:38:52 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关于</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/about/</guid>
+      <description>关于我 Python 开发者 走在转型 Golang 的路上 坐标: 上海</description>
+    </item>
+    
+    <item>
+      <title>2019年的目标</title>
+      <link>http://localhost:1313/post/2019-plan/</link>
+      <pubDate>Thu, 20 Dec 2018 15:48:17 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/2019-plan/</guid>
+      <description>2018 年就这样过去了, 没有做成什么有意义的事情。 阅读三本原著英语小说、看讲义 重刷计算机的基本知识 业余时间学习 golang</description>
+    </item>
+    
+  </channel>
+</rss>
