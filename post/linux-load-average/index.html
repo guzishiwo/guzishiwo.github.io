@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>2019年的目标 - 味次酱博客</title>
+  <title>Linux 平均负载 - 味次酱博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="wcj" /><meta name="description" content="2018 年就这样过去了, 没有做成什么有意义的事情。 以下是 2019 年的目标 阅读三本原著英语小说、看讲义 重刷计算机的基本知识 业余时间学习 golang" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="wcj" /><meta name="description" content="当登录 Linux 服务器时，我们应该观测哪些数据？ 一、Linux 平均负载 命令：uptime 1 2 3 4 5 $ uptime 19:41 up 41 mins, 5 users, load averages: 2.13 2.27 3.39 $ man uptime The uptime utility displays the current time, the length" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/2019-plan/" />
+<link rel="canonical" href="http://localhost:1313/post/linux-load-average/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -38,26 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="2019年的目标" />
-<meta property="og:description" content="2018 年就这样过去了, 没有做成什么有意义的事情。 以下是 2019 年的目标 阅读三本原著英语小说、看讲义 重刷计算机的基本知识 业余时间学习 golang" />
+<meta property="og:title" content="Linux 平均负载" />
+<meta property="og:description" content="当登录 Linux 服务器时，我们应该观测哪些数据？ 一、Linux 平均负载 命令：uptime 1 2 3 4 5 $ uptime 19:41 up 41 mins, 5 users, load averages: 2.13 2.27 3.39 $ man uptime The uptime utility displays the current time, the length" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/2019-plan/" /><meta property="article:published_time" content="2018-12-20T15:48:17&#43;08:00"/>
-<meta property="article:modified_time" content="2018-12-20T15:48:17&#43;08:00"/>
+<meta property="og:url" content="http://localhost:1313/post/linux-load-average/" /><meta property="article:published_time" content="2018-12-21T19:48:17&#43;08:00"/>
+<meta property="article:modified_time" content="2018-12-21T19:48:17&#43;08:00"/>
 
-<meta itemprop="name" content="2019年的目标">
-<meta itemprop="description" content="2018 年就这样过去了, 没有做成什么有意义的事情。 以下是 2019 年的目标 阅读三本原著英语小说、看讲义 重刷计算机的基本知识 业余时间学习 golang">
-
-
-<meta itemprop="datePublished" content="2018-12-20T15:48:17&#43;08:00" />
-<meta itemprop="dateModified" content="2018-12-20T15:48:17&#43;08:00" />
-<meta itemprop="wordCount" content="61">
+<meta itemprop="name" content="Linux 平均负载">
+<meta itemprop="description" content="当登录 Linux 服务器时，我们应该观测哪些数据？ 一、Linux 平均负载 命令：uptime 1 2 3 4 5 $ uptime 19:41 up 41 mins, 5 users, load averages: 2.13 2.27 3.39 $ man uptime The uptime utility displays the current time, the length">
 
 
+<meta itemprop="datePublished" content="2018-12-21T19:48:17&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-21T19:48:17&#43;08:00" />
+<meta itemprop="wordCount" content="116">
 
-<meta itemprop="keywords" content="日记," />
+
+
+<meta itemprop="keywords" content="Linux," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="2019年的目标"/>
-<meta name="twitter:description" content="2018 年就这样过去了, 没有做成什么有意义的事情。 以下是 2019 年的目标 阅读三本原著英语小说、看讲义 重刷计算机的基本知识 业余时间学习 golang"/>
+<meta name="twitter:title" content="Linux 平均负载"/>
+<meta name="twitter:description" content="当登录 Linux 服务器时，我们应该观测哪些数据？ 一、Linux 平均负载 命令：uptime 1 2 3 4 5 $ uptime 19:41 up 41 mins, 5 users, load averages: 2.13 2.27 3.39 $ man uptime The uptime utility displays the current time, the length"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -122,12 +122,12 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">2019年的目标</h1>
+      <h1 class="post-title">Linux 平均负载</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2018-12-20 </span>
+        <span class="post-time"> 2018-12-21 </span>
         
-        <span id="/post/2019-plan/" class="leancloud-visitors" data-flag-title="2019年的目标">
+        <span id="/post/linux-load-average/" class="leancloud-visitors" data-flag-title="Linux 平均负载">
             <em class="post-meta-item-text">当前页面访问次数</em>
             <i class="leancloud-visitors-count">1</i>
         </span> 
@@ -139,36 +139,60 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#一-linux-平均负载">一、Linux 平均负载</a>
+<ul>
+<li>
+<ul>
+<li><a href="#命令-uptime">命令：uptime</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      <blockquote>
-<p>2018 年就这样过去了, 没有做成什么有意义的事情。</p>
+      
+
+<blockquote>
+<p>当登录 Linux 服务器时，我们应该观测哪些数据？</p>
 </blockquote>
 
-<p>以下是 2019 年的目标</p>
+<h2 id="一-linux-平均负载">一、Linux 平均负载</h2>
 
-<ol>
-<li>阅读三本原著英语小说、看讲义</li>
-<li>重刷计算机的基本知识</li>
-<li>业余时间学习 golang</li>
-</ol>
+<h4 id="命令-uptime">命令：uptime</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ uptime
+<span class="m">19</span>:41  up <span class="m">41</span> mins, <span class="m">5</span> users, load averages: <span class="m">2</span>.13 <span class="m">2</span>.27 <span class="m">3</span>.39
+
+$ man uptime
+The uptime utility displays the current time, the length of <span class="nb">time</span> the system has been up, the number of users, and the load average of the system over the last <span class="m">1</span>, <span class="m">5</span>, and <span class="m">15</span> minutes</code></pre></td></tr></table>
+</div>
+</div>
+<p>重点解释一下：**load averages **平均负载</p>
 
     </div>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/%E6%97%A5%E8%AE%B0/">日记</a>
+          <a href="/tags/linux/">Linux</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/linux-load-average/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Linux 平均负载</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/break-ssl-pining/">
-            <span class="next-text nav-default">突破SSL-PINING</span>
+        
+        <a class="next" href="/post/2019-plan/">
+            <span class="next-text nav-default">2019年的目标</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
