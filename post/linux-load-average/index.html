@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2018-12-21T19:48:17&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-21T19:48:17&#43;08:00" />
-<meta itemprop="wordCount" content="1139">
+<meta itemprop="wordCount" content="1961">
 
 
 
@@ -161,6 +161,9 @@
 <li><a href="#3-2-实际分析">3.2 实际分析</a>
 <ul>
 <li><a href="#3-2-1-cpu-密集型的情况">3.2.1 CPU 密集型的情况</a></li>
+<li><a href="#3-2-2-io-密集型的情况">3.2.2 IO 密集型的情况</a></li>
+<li><a href="#3-2-2-多个进程-cpu-切换的情况">3.2.2 多个进程 cpu 切换的情况</a></li>
+<li><a href="#3-2-5-总结">3.2.5 总结</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -326,6 +329,187 @@ Average:        <span class="m">0</span>      <span class="m">1281</span>   <spa
 <p>笔者用 docker ubuntu18.04 来分别模拟 cpu 密集型的进程、I/O 密集型进程、大量等待 CPU 的进程调度</p>
 
 <h4 id="3-2-1-cpu-密集型的情况">3.2.1 CPU 密集型的情况</h4>
+
+<p>Termnal 1 通过 stress-ng 模拟 cpu 密集型的任务 :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ root@c6e8ee3c2c02:/# stress-ng -c <span class="m">1</span> --timeout <span class="m">600</span>
+stress-ng: info:  <span class="o">[</span><span class="m">1628</span><span class="o">]</span> dispatching hogs: <span class="m">1</span> cpu</code></pre></td></tr></table>
+</div>
+</div>
+<p>Termnal 2 监测平均负载动态的变化:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># -d 高亮显示变化的区域</span>
+$ watch -d uptime
+Every <span class="m">2</span>.0s: uptime    c6e8ee3c2c02: Sat Dec <span class="m">22</span> <span class="m">14</span>:14:07 <span class="m">2018</span>
+<span class="m">14</span>:14:07 up  <span class="m">4</span>:06,  <span class="m">0</span> users,  load average: <span class="m">0</span>.80, <span class="m">0</span>.67, <span class="m">0</span>.45</code></pre></td></tr></table>
+</div>
+</div>
+<p>Terminal 3 通过 mpstat 查看 cpu 的状况， pidstat 查看进程详细的信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ root@c6e8ee3c2c02:/# mpstat -P ALL <span class="m">5</span> <span class="m">1</span>
+Linux <span class="m">4</span>.9.93-linuxkit-aufs <span class="o">(</span>c6e8ee3c2c02<span class="o">)</span> 	<span class="m">12</span>/22/18 	_x86_64_	<span class="o">(</span><span class="m">2</span> CPU<span class="o">)</span>
+<span class="m">14</span>:03:55     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+<span class="m">14</span>:04:00     all   <span class="m">49</span>.85    <span class="m">0</span>.00    <span class="m">0</span>.50    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">49</span>.65
+<span class="m">14</span>:04:00       <span class="m">0</span>   <span class="m">92</span>.80    <span class="m">0</span>.00    <span class="m">0</span>.60    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">6</span>.60
+<span class="m">14</span>:04:00       <span class="m">1</span>    <span class="m">6</span>.81    <span class="m">0</span>.00    <span class="m">0</span>.40    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">92</span>.79
+$ root@c6e8ee3c2c02:/# pidstat -u <span class="m">5</span> <span class="m">1</span>
+Linux <span class="m">4</span>.9.93-linuxkit-aufs <span class="o">(</span>c6e8ee3c2c02<span class="o">)</span> 	<span class="m">12</span>/22/18 	_x86_64_	<span class="o">(</span><span class="m">2</span> CPU<span class="o">)</span>
+
+<span class="m">14</span>:18:06      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+<span class="m">14</span>:18:11        <span class="m">0</span>      <span class="m">1629</span>   <span class="m">99</span>.80    <span class="m">0</span>.20    <span class="m">0</span>.00    <span class="m">0</span>.00  <span class="m">100</span>.00     <span class="m">0</span>  stress-ng-cpu
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        <span class="m">0</span>      <span class="m">1629</span>   <span class="m">99</span>.80    <span class="m">0</span>.20    <span class="m">0</span>.00    <span class="m">0</span>.00  <span class="m">100</span>.00     -  stress-ng-cpu</code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="3-2-2-io-密集型的情况">3.2.2 IO 密集型的情况</h4>
+
+<p>Terminal 1 通过 stress-ng 模拟一个 io 密集型的任务 :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ root@c6e8ee3c2c02:/# stress-ng -i <span class="m">1</span>  --timeout <span class="m">600</span>
+stress-ng: info:  <span class="o">[</span><span class="m">2568</span><span class="o">]</span> dispatching hogs: <span class="m">1</span> io</code></pre></td></tr></table>
+</div>
+</div>
+<p>Terminal 2 监测<strong>平均负载</strong>动态的变化:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># -d 高亮显示变化的区域</span>
+$ watch -d uptime
+Every <span class="m">2</span>.0s: uptime    c6e8ee3c2c02: Sat Dec <span class="m">22</span> <span class="m">14</span>:14:07 <span class="m">2018</span>
+<span class="m">14</span>:14:07 up  <span class="m">4</span>:06,  <span class="m">0</span> users,  load average: <span class="m">0</span>.80, <span class="m">0</span>.67, <span class="m">0</span>.45</code></pre></td></tr></table>
+</div>
+</div>
+<p>Terminal 3 通过 mpstat 查看 cpu 的状况， pidstat 查看进程详细的信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ root@c6e8ee3c2c02:/# mpstat -P ALL <span class="m">5</span>
+<span class="m">14</span>:24:42     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+<span class="m">14</span>:24:47     all    <span class="m">0</span>.45    <span class="m">0</span>.00   <span class="m">12</span>.99   <span class="m">21</span>.13    <span class="m">0</span>.00   <span class="m">23</span>.62    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">41</span>.81
+<span class="m">14</span>:24:47       <span class="m">0</span>    <span class="m">0</span>.24    <span class="m">0</span>.00    <span class="m">9</span>.74    <span class="m">9</span>.98    <span class="m">0</span>.00   <span class="m">49</span>.64    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">30</span>.40
+<span class="m">14</span>:24:47       <span class="m">1</span>    <span class="m">0</span>.65    <span class="m">0</span>.00   <span class="m">15</span>.95   <span class="m">31</span>.25    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">52</span>.16</code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="3-2-2-多个进程-cpu-切换的情况">3.2.2 多个进程 cpu 切换的情况</h4>
+
+<p>Terminal 1 通过 stress-ng 模拟 4 个进程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ root@c6e8ee3c2c02:/# stress-ng -c <span class="m">4</span> --timeout <span class="m">600</span>
+stress-ng: info:  <span class="o">[</span><span class="m">3353</span><span class="o">]</span> dispatching hogs: <span class="m">4</span> cpu</code></pre></td></tr></table>
+</div>
+</div>
+<p>Terminal 2 监测<strong>平均负载</strong>动态的变化，这台机器的 cpu 为 2 个，但是平均负载为 4， 明显超过了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ root@c6e8ee3c2c02:/# watch -d uptime
+Every <span class="m">2</span>.0s:...  c6e8ee3c2c02: Sat Dec <span class="m">22</span> <span class="m">14</span>:34:41 <span class="m">2018</span>
+<span class="m">14</span>:34:41 up  <span class="m">4</span>:27,  <span class="m">0</span> users,  load average: <span class="m">4</span>.25, <span class="m">2</span>.51, <span class="m">1</span>.29</code></pre></td></tr></table>
+</div>
+</div>
+<p>Terminal 3 通过 mpstat 发现满 cpu 的状况， 再通过 pidstat 去查看占用 cpu 的进程，4 个进程去抢占 2 个 cpu，每个进程等待时间%wait 为 50%</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ root@c6e8ee3c2c02:/# mpstat -P ALL <span class="m">5</span>
+Average:     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+Average:     all   <span class="m">99</span>.80    <span class="m">0</span>.00    <span class="m">0</span>.20    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00
+Average:       <span class="m">0</span>   <span class="m">99</span>.90    <span class="m">0</span>.00    <span class="m">0</span>.10    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00
+Average:       <span class="m">1</span>   <span class="m">99</span>.70    <span class="m">0</span>.00    <span class="m">0</span>.30    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.00
+$ root@c6e8ee3c2c02:/# pidstat -u <span class="m">5</span>
+Linux <span class="m">4</span>.9.93-linuxkit-aufs <span class="o">(</span>c6e8ee3c2c02<span class="o">)</span> 	<span class="m">12</span>/22/18 	_x86_64_	<span class="o">(</span><span class="m">2</span> CPU<span class="o">)</span>
+<span class="m">14</span>:39:10      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+<span class="m">14</span>:39:15        <span class="m">0</span>      <span class="m">3354</span>   <span class="m">49</span>.50    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">50</span>.30   <span class="m">49</span>.50     <span class="m">0</span>  stress-ng-cpu
+<span class="m">14</span>:39:15        <span class="m">0</span>      <span class="m">3355</span>   <span class="m">49</span>.70    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">50</span>.30   <span class="m">49</span>.70     <span class="m">1</span>  stress-ng-cpu
+<span class="m">14</span>:39:15        <span class="m">0</span>      <span class="m">3356</span>   <span class="m">49</span>.50    <span class="m">0</span>.20    <span class="m">0</span>.00   <span class="m">50</span>.10   <span class="m">49</span>.70     <span class="m">0</span>  stress-ng-cpu
+<span class="m">14</span>:39:15        <span class="m">0</span>      <span class="m">3357</span>   <span class="m">49</span>.30    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">50</span>.30   <span class="m">49</span>.30     <span class="m">1</span>  stress-ng-cpu
+<span class="m">14</span>:39:15        <span class="m">0</span>      <span class="m">3565</span>    <span class="m">0</span>.00    <span class="m">0</span>.20    <span class="m">0</span>.00    <span class="m">0</span>.00    <span class="m">0</span>.20     <span class="m">0</span>  watch
+
+<span class="m">14</span>:39:15      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+<span class="m">14</span>:39:20        <span class="m">0</span>      <span class="m">3354</span>   <span class="m">49</span>.80    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">50</span>.20   <span class="m">49</span>.80     <span class="m">0</span>  stress-ng-cpu
+<span class="m">14</span>:39:20        <span class="m">0</span>      <span class="m">3355</span>   <span class="m">49</span>.60    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">50</span>.40   <span class="m">49</span>.60     <span class="m">1</span>  stress-ng-cpu
+<span class="m">14</span>:39:20        <span class="m">0</span>      <span class="m">3356</span>   <span class="m">49</span>.60    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">50</span>.40   <span class="m">49</span>.60     <span class="m">0</span>  stress-ng-cpu
+<span class="m">14</span>:39:20        <span class="m">0</span>      <span class="m">3357</span>   <span class="m">49</span>.80    <span class="m">0</span>.00    <span class="m">0</span>.00   <span class="m">50</span>.40   <span class="m">49</span>.80     <span class="m">1</span>  stress-ng-cpu</code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="3-2-5-总结">3.2.5 总结</h4>
+
+<p>平均负载过高，可能是 cpu 密集型进程任务，也有可能 IO 密集型任务，请通过 mpstat、pidstat、htop 工具具体分析。</p>
 
 <blockquote>
 <p>笔者参考 Linux 性能优化实战做的笔记如有冒犯，请指出</p>
