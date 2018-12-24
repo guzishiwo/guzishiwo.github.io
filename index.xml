@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>45min快速掌握Golang(二)</title>
+      <link>http://localhost:1313/post/45min-quick-study-golang-part2/</link>
+      <pubDate>Mon, 24 Dec 2018 20:20:17 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/45min-quick-study-golang-part2/</guid>
+      <description>一、Golang 如何面向对象 1. 1 new 、&amp;amp; 和 * 的关系 &amp;amp;type: 取指向 type 的内存地址，类似 C/C++的。 new(type)：初始化对象，对象的属性初</description>
+    </item>
+    
+    <item>
       <title>45min快速掌握Golang(一)</title>
       <link>http://localhost:1313/post/45min-quick-study-golang-part1/</link>
       <pubDate>Mon, 24 Dec 2018 17:45:17 +0800</pubDate>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>45min快速掌握Golang(二) - 味次酱博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="wcj" /><meta name="description" content="一、Golang 如何面向对象 1. 1 new 、&amp;amp; 和 * 的关系 &amp;amp;type: 取指向 type 的内存地址，类似 C/C&#43;&#43;的。 new(type)：初始化对象，对象的属性初" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/45min-quick-study-golang-part2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="45min快速掌握Golang(二)" />
+<meta property="og:description" content="一、Golang 如何面向对象 1. 1 new 、&amp; 和 * 的关系 &amp;type: 取指向 type 的内存地址，类似 C/C&#43;&#43;的。 new(type)：初始化对象，对象的属性初" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/45min-quick-study-golang-part2/" /><meta property="article:published_time" content="2018-12-24T20:20:17&#43;08:00"/>
+<meta property="article:modified_time" content="2018-12-24T20:20:17&#43;08:00"/>
+
+<meta itemprop="name" content="45min快速掌握Golang(二)">
+<meta itemprop="description" content="一、Golang 如何面向对象 1. 1 new 、&amp; 和 * 的关系 &amp;type: 取指向 type 的内存地址，类似 C/C&#43;&#43;的。 new(type)：初始化对象，对象的属性初">
+
+
+<meta itemprop="datePublished" content="2018-12-24T20:20:17&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-24T20:20:17&#43;08:00" />
+<meta itemprop="wordCount" content="599">
+
+
+
+<meta itemprop="keywords" content="Golang," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="45min快速掌握Golang(二)"/>
+<meta name="twitter:description" content="一、Golang 如何面向对象 1. 1 new 、&amp; 和 * 的关系 &amp;type: 取指向 type 的内存地址，类似 C/C&#43;&#43;的。 new(type)：初始化对象，对象的属性初"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Wcj&#39;Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Wcj&#39;Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">45min快速掌握Golang(二)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-12-24 </span>
+        
+        <span id="/post/45min-quick-study-golang-part2/" class="leancloud-visitors" data-flag-title="45min快速掌握Golang(二)">
+            <em class="post-meta-item-text">当前页面访问次数</em>
+            <i class="leancloud-visitors-count">1</i>
+        </span> 
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#一-golang-如何面向对象">一、Golang 如何面向对象</a>
+<ul>
+<li><a href="#1-1-new-和-的关系">1. 1 new 、&amp; 和 * 的关系</a></li>
+<li><a href="#1-2-模拟面向对象">1.2 模拟面向对象</a></li>
+<li><a href="#1-3-struct-定义变量">1.3 Struct 定义变量</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="一-golang-如何面向对象">一、Golang 如何面向对象</h2>
+
+<h3 id="1-1-new-和-的关系">1. 1 new 、&amp; 和 * 的关系</h3>
+
+<ul>
+<li><code>&amp;type</code>: 取指向 type 的内存地址，类似 C/C++的。</li>
+<li><code>new(type)</code>：初始化对象，对象的属性初始化<code>int =&gt; 0， string =&gt; &quot;&quot;</code>返回指向 type 内存的地址（pointer），类似面向对象 C++、JAVA 返回地址（pointer)。</li>
+<li><code>*type</code> 1. 在定义变量的时候是指&rdquo;指向这个类型变量的指针&rdquo; 2. <code>*variable</code> <code>解引用</code>指向这块内存的存储的值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Cat</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">nik</span> <span class="kt">string</span>
+	<span class="nx">age</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">updateName</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Cat</span><span class="p">,</span> <span class="nx">nik</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// 可以省略 (*)
+</span><span class="c1"></span>	<span class="p">(</span><span class="o">*</span><span class="nx">c</span><span class="p">).</span><span class="nx">nik</span> <span class="p">=</span> <span class="nx">nik</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">d1</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">Cat</span><span class="p">{}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;my name is %s, my age is %d\n&#34;</span><span class="p">,</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">nik</span><span class="p">,</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>
+	<span class="nf">updateName</span><span class="p">(</span><span class="nx">d1</span><span class="p">,</span> <span class="s">&#34;A&#34;</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;my name is %s, my age is %d\n&#34;</span><span class="p">,</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">nik</span><span class="p">,</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>
+	<span class="kd">var</span> <span class="nx">d2</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Cat</span><span class="p">)</span> <span class="c1">// equal with var d1 = &amp;Cat{}
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;my name is %s, my age is %d\n&#34;</span><span class="p">,</span> <span class="nx">d2</span><span class="p">.</span><span class="nx">nik</span><span class="p">,</span> <span class="nx">d2</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>
+	<span class="nx">d2</span><span class="p">.</span><span class="nx">nik</span> <span class="p">=</span> <span class="s">&#34;Hello&#34;</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;my name is %s, my age is %d\n&#34;</span><span class="p">,</span> <span class="nx">d2</span><span class="p">.</span><span class="nx">nik</span><span class="p">,</span> <span class="nx">d2</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="1-2-模拟面向对象">1.2 模拟面向对象</h3>
+
+<p>Golang 是没有继承类，继承这些面向对象的概念的，但是有可以用<code>struct</code>keyword 来实现类似类</p>
+
+<p>先用 Python 来写一个 class 和方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nik</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nik</span> <span class="o">=</span> <span class="n">nik</span>
+
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Hi {} I&#39;m {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nik</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>再使用 Golang 来改写</p>
+
+<ul>
+<li>struct-field 的方式模拟类和属性</li>
+<li>通过 Struct-function 的方式模拟方法</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 初始化构造函数
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewDog</span><span class="p">(</span><span class="nx">nik</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">Dog</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">Dog</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span> <span class="nx">nik</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 结构体定义方法
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Dog</span><span class="p">)</span> <span class="nf">greet</span><span class="p">(</span><span class="nx">other</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Hi %s I&#39;m %s&#34;</span><span class="p">,</span> <span class="nx">other</span><span class="p">,</span> <span class="nx">d</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">d</span> <span class="p">=</span> <span class="nf">NewDog</span><span class="p">(</span><span class="s">&#34;wangcai&#34;</span><span class="p">)</span>
+	<span class="nx">d</span><span class="p">.</span><span class="nf">greet</span><span class="p">(</span><span class="s">&#34;Qi&#34;</span><span class="p">)</span>
+    <span class="c1">// Hi Qi I&#39;m wangcai
+</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="1-3-struct-定义变量">1.3 Struct 定义变量</h3>
+
+<p>Struct-filed 包含指向自己的指针</p>
+
+<ul>
+<li><code>(* pointer).value == pointer.value</code> golang 自己优化，不管是指针还是结构体本身直接用<code>.</code>来访问, 这样就非常 nice 了，写的非常舒心。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Node</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">value</span> <span class="kt">int</span>
+	<span class="nx">next</span>  <span class="o">*</span><span class="nx">Node</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">n1</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">Node</span><span class="p">{</span><span class="nx">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">next</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">Node</span><span class="p">{</span><span class="nx">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">((</span><span class="o">*</span><span class="nx">n1</span><span class="p">).</span><span class="nx">value</span><span class="p">)</span>
+	<span class="c1">// 省略写法
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">n1</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">((</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="nx">n1</span><span class="p">).</span><span class="nx">next</span><span class="p">).</span><span class="nx">value</span><span class="p">)</span>
+	<span class="c1">// 省略写法
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">n1</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;n1 value %d next= %v&#34;</span><span class="p">,</span> <span class="nx">n1</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span> <span class="nx">n1</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/golang/">Golang</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/45min-quick-study-golang-part1/">
+            <span class="next-text nav-default">45min快速掌握Golang(一)</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        ><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'CANGLeMgwpE1RSjaoH3odllO-gzGzoHsz',
+            appKey: 'sMjSA8KQli5F966o0xrJJ9aK',
+            visitor: true, 
+            notify:false, 
+            verify:false, 
+            placeholder: '留下你的足迹',
+
+        })
+    </script>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:weicijiang@foxmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">wcj</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
