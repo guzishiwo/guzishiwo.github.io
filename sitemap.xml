@@ -10,6 +10,13 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/post/45min-quick-study-golang-part1/</loc>
+    <lastmod>2018-12-24T17:45:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/linux-load-average/</loc>
     <lastmod>2018-12-21T19:48:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -44,6 +51,13 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/tags/golang/</loc>
+    <lastmod>2018-12-24T17:45:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/tags/linux/</loc>
     <lastmod>2018-12-21T19:48:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -52,7 +66,7 @@
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2018-12-21T19:48:17+08:00</lastmod>
+    <lastmod>2018-12-24T17:45:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
