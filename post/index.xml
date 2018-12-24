@@ -12,15 +12,6 @@
     
     
     <item>
-      <title>45min快速掌握Golang(一)</title>
-      <link>http://localhost:1313/post/45min-quick-study-golang-part1/</link>
-      <pubDate>Fri, 21 Dec 2018 19:48:17 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/45min-quick-study-golang-part1/</guid>
-      <description>一、Golang 如何定义变量 在 golang 里面，定义变量用 var keyword 格式 var variable_name vairable_type 1 2 var x string var x string = &amp;#34;Hello Golang&amp;#34; 也可以省略定义变量类型 1 x := &amp;#34;Hello Golang&amp;#34; // var x string = &amp;#34;Hello Golang&amp;#34; 变量类型：</description>
-    </item>
-    
-    <item>
       <title>Linux 平均负载深度分析</title>
       <link>http://localhost:1313/post/linux-load-average/</link>
       <pubDate>Fri, 21 Dec 2018 19:48:17 +0800</pubDate>
