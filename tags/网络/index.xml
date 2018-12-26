@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络 on 味次酱博客</title>
+    <link>http://localhost:1313/tags/%E7%BD%91%E7%BB%9C/</link>
+    <description>Recent content in 网络 on 味次酱博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 26 Dec 2018 17:49:32 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ifconfig命令详解</title>
+      <link>http://localhost:1313/post/if-config-command/</link>
+      <pubDate>Wed, 26 Dec 2018 17:49:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/if-config-command/</guid>
+      <description>当我们在终端上敲下 ifconfig 你又了解多少呢？ 一：输入 ifconfig Windows/Mac 命令行 shell 中输入ifconfig 或者 Linux ip addr 输出东西你是否都了解啦 1 $ ifconfig ip 地址参考第一章节 MAC 地址</description>
+    </item>
+    
+  </channel>
+</rss>

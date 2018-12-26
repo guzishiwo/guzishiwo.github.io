@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>ifconfig命令详解</title>
+      <link>http://localhost:1313/post/if-config-command/</link>
+      <pubDate>Wed, 26 Dec 2018 17:49:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/if-config-command/</guid>
+      <description>当我们在终端上敲下 ifconfig 你又了解多少呢？ 一：输入 ifconfig Windows/Mac 命令行 shell 中输入ifconfig 或者 Linux ip addr 输出东西你是否都了解啦 1 $ ifconfig ip 地址参考第一章节 MAC 地址</description>
+    </item>
+    
+    <item>
       <title>45min快速掌握Golang(二)</title>
       <link>http://localhost:1313/post/45min-quick-study-golang-part2/</link>
       <pubDate>Mon, 24 Dec 2018 20:20:17 +0800</pubDate>

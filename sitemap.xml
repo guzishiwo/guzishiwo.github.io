@@ -10,6 +10,13 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/post/if-config-command/</loc>
+    <lastmod>2018-12-26T17:49:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/45min-quick-study-golang-part2/</loc>
     <lastmod>2018-12-24T20:20:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -73,7 +80,7 @@
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2018-12-24T20:20:17+08:00</lastmod>
+    <lastmod>2018-12-26T17:49:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -102,6 +109,13 @@
   <url>
     <loc>http://localhost:1313/tags/%E7%88%AC%E8%99%AB/</loc>
     <lastmod>2018-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2018-12-26T17:49:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
