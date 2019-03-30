@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elixir on 味次酱博客</title>
+    <link>http://localhost:1313/tags/elixir/</link>
+    <description>Recent content in Elixir on 味次酱博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 30 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/elixir/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>小程序数据解密算法 Elixir版</title>
+      <link>http://localhost:1313/post/elixir-wx-biz-data-crypt/</link>
+      <pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/elixir-wx-biz-data-crypt/</guid>
+      <description>微信小程序解密说明官方文档 https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html 使用方法 erlang 已经有现成的crypto算法包， elixir直接调用就行。 1. 添加crypto的库 1 2 3 4 5 6 # mix.exs def application do</description>
+    </item>
+    
+  </channel>
+</rss>

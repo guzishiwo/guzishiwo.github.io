@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Elixir</title>
+      <link>http://localhost:1313/tags/elixir/</link>
+      <pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/elixir/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Golang</title>
       <link>http://localhost:1313/tags/golang/</link>
       <pubDate>Mon, 24 Dec 2018 20:20:17 +0800</pubDate>
@@ -35,6 +44,15 @@
       <pubDate>Fri, 21 Dec 2018 19:48:17 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>小程序</title>
+      <link>http://localhost:1313/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/</link>
+      <pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/</guid>
       <description></description>
     </item>
     
